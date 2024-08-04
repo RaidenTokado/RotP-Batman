@@ -66,6 +66,7 @@ public class InitStands {
                             .precision(5)
                             .build())
                     .addOst(InitSounds.BATMAN_OST)
+                    .disableManualControl().disableStandLeap()
                     .build(),
                     
                     InitEntities.ENTITIES,
