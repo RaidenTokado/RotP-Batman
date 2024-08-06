@@ -1,0 +1,13 @@
+{
+  "entity.rotp_bat.batman": "Batman",
+  "stand.rotp_bat.batman": "Batman",
+  "action.rotp_bat.batman_punch": "Punch",
+  "action.rotp_bat.batman_batarang": "Throw Batarang",
+  "action.rotp_bat.batman_grapple": "Grapple",
+  "action.rotp_bat.batman_grapple_entity": "Grapple entity",
+  "item.rotp_bat.batman_mask": "Batman Mask",
+  "item.rotp_bat.batman_symbol": "Batman Symbol",
+  "itemGroup.BatmanModTab": "Batman ROTP",
+  "rotp_bat.subtitle.batman_name": "\"I'm Batman!\"",
+  "multiverse.story_part.dc": "DC Universe"
+}

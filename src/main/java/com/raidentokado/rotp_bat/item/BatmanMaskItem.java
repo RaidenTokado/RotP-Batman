@@ -10,7 +10,7 @@ public class BatmanMaskItem extends CustomModelArmorItem {
     protected String textureStr;
 
     public BatmanMaskItem(Properties builder) {
-        super(ModArmorMaterials.BATMAN_MASK, EquipmentSlotType.HEAD, builder);
+        super(ModArmorMaterials.BATMANV7, EquipmentSlotType.HEAD, builder);
     }
 
     @Override

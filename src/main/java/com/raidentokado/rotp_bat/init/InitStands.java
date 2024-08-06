@@ -9,6 +9,7 @@ import com.github.standobyte.jojo.power.impl.stand.stats.StandStats;
 import com.github.standobyte.jojo.power.impl.stand.type.EntityStandType;
 import com.github.standobyte.jojo.power.impl.stand.type.StandType;
 import com.raidentokado.rotp_bat.RotpBATAddon;
+import com.raidentokado.rotp_bat.action.BMBatarang;
 import com.raidentokado.rotp_bat.action.BMGrapple;
 import com.raidentokado.rotp_bat.entity.stand.stands.BatmanEntity;
 import net.minecraft.util.text.ITextComponent;
@@ -33,11 +34,16 @@ public class InitStands {
                     .punchSound(InitSounds.BATMAN_PUNCH).swingHand().standOffsetFromUser(0,0,.5)
                     .standSound(StandEntityAction.Phase.WINDUP, InitSounds.BATMAN_PUNCH)));
 
+    public static final RegistryObject<StandEntityAction> BATMAN_BATARANG = ACTIONS.register("batman_batarang",
+            () -> new BMBatarang(new StandEntityAction.Builder()
+                    .staminaCostTick(1).autoSummonStand().standUserWalkSpeed(1.0F)
+                    .standSound(StandEntityAction.Phase.WINDUP, InitSounds.BATMAN_BATARANG)));
+
     public static final RegistryObject<StandEntityAction> BATMAN_GRAPPLE = ACTIONS.register("batman_grapple",
             () -> new BMGrapple(new StandEntityAction.Builder().holdType()
                     .staminaCostTick(1).autoSummonStand().standUserWalkSpeed(1.0F)
                     .standSound(StandEntityAction.Phase.WINDUP, InitSounds.BATMAN_GRAPPLE)));
-    public static final RegistryObject<StandEntityAction> GREEN_LANTERN_GRAPPLE_ENTITY = ACTIONS.register("batman_grapple_entity",
+    public static final RegistryObject<StandEntityAction> BATMAN_GRAPPLE_ENTITY = ACTIONS.register("batman_grapple_entity",
             () -> new BMGrapple(new StandEntityAction.Builder().holdType()
                     .staminaCostTick(1).autoSummonStand().standUserWalkSpeed(1.0F)
                     .standSound(StandEntityAction.Phase.WINDUP, InitSounds.BATMAN_GRAPPLE)
@@ -52,7 +58,8 @@ public class InitStands {
                     .color(0x1a1a1a)
                     .storyPartName(PART_DC_NAME)
                     .leftClickHotbar(
-                            BATMAN_PUNCH.get()
+                            BATMAN_PUNCH.get(),
+                            BATMAN_BATARANG.get()
                             )
                     .rightClickHotbar(
                             BATMAN_GRAPPLE.get()

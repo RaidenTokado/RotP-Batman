@@ -78,7 +78,7 @@ public class BMGrapplingVineEntity extends OwnerBoundProjectileEntity {
             return;
         }
         if (!level.isClientSide() && (userStandPower == null || userStandPower.getHeldAction() != (
-                bindEntities ? InitStands.GREEN_LANTERN_GRAPPLE_ENTITY.get() :
+                bindEntities ? InitStands.BATMAN_GRAPPLE_ENTITY.get() :
                         InitStands.BATMAN_GRAPPLE.get()))) {
             remove();
             return;

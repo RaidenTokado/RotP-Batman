@@ -10,7 +10,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 
 public enum ModArmorMaterials implements IArmorMaterial {
-    BATMAN_MASK("batman_mask_item", 3, new int[]{0, 0, 0, 1}, 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0.0F, 0.0F, () -> Ingredient.EMPTY);
+    BATMANV7("batmanv7", 25, new int[]{2, 5, 7, 2}, 0, SoundEvents.ARMOR_EQUIP_GENERIC, 1.0F, 2.0F, () -> Ingredient.EMPTY);
 
     private static final int[] MAX_DAMAGE_ARRAY = new int[]{13, 15, 16, 11};
     private final String name;
