@@ -26,8 +26,12 @@ public class InitSounds {
             () -> new SoundEvent(new ResourceLocation(RotpBATAddon.MOD_ID, "bm_summon")));
     public static final RegistryObject<SoundEvent> BATMAN_UNSUMMON = SOUNDS.register("bm_unsummon",
             () -> new SoundEvent(new ResourceLocation(RotpBATAddon.MOD_ID, "bm_unsummon")));
+    public static final RegistryObject<SoundEvent> BATMAN_TAKEDOWN_START = SOUNDS.register("bm_takedown",
+            () -> new SoundEvent(new ResourceLocation(RotpBATAddon.MOD_ID, "bm_takedown")));
     public static final RegistryObject<SoundEvent> USER_BATMAN = SOUNDS.register("bm_user",
             ()->new SoundEvent(new ResourceLocation(RotpBATAddon.MOD_ID, "bm_user")));
+    public static final RegistryObject<SoundEvent> NOTHING = SOUNDS.register("nothing",
+            () -> new SoundEvent(new ResourceLocation(RotpBATAddon.MOD_ID, "nothing")));
 
     static final OstSoundList BATMAN_OST = new OstSoundList(new ResourceLocation(RotpBATAddon.MOD_ID, "batman_ost"), SOUNDS);
 }

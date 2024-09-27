@@ -2,18 +2,21 @@ package com.raidentokado.rotp_bat.action;
 
 import javax.annotation.Nullable;
 
-import com.github.standobyte.jojo.action.stand.StandAction;
 import com.github.standobyte.jojo.action.stand.StandEntityAction;
-import com.raidentokado.rotp_bat.entity.damaging.projectile.BMBatarangEntity;
+import com.github.standobyte.jojo.entity.damaging.projectile.HGEmeraldEntity;
 import com.github.standobyte.jojo.entity.stand.StandEntity;
 import com.github.standobyte.jojo.entity.stand.StandEntityTask;
 import com.github.standobyte.jojo.entity.stand.StandRelativeOffset;
 import com.github.standobyte.jojo.entity.stand.StandStatFormulas;
-import com.raidentokado.rotp_bat.entity.stand.stands.BatmanEntity;
+import com.github.standobyte.jojo.entity.stand.stands.HierophantGreenEntity;
 import com.github.standobyte.jojo.init.ModStatusEffects;
+import com.github.standobyte.jojo.init.power.stand.ModStandsInit;
 import com.github.standobyte.jojo.power.impl.stand.IStandPower;
 import com.github.standobyte.jojo.util.general.GeneralUtil;
+import com.github.standobyte.jojo.util.mod.JojoModUtil;
 
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class BMBatarang extends StandEntityAction {
@@ -21,7 +24,7 @@ public class BMBatarang extends StandEntityAction {
     public BMBatarang(StandEntityAction.Builder builder) {
         super(builder);
     }
-
+//    Да я заебался блять, нихуя не понимаю сука
     @Override
     public void standTickPerform(World world, StandEntity standEntity, IStandPower userPower, StandEntityTask task) {
         if (!world.isClientSide()) {
@@ -29,19 +32,28 @@ public class BMBatarang extends StandEntityAction {
             double fireRate = StandStatFormulas.projectileFireRateScaling(standEntity, userPower);
             if (shift) fireRate *= 2.5;
             GeneralUtil.doFractionTimes(() -> {
-                BMBatarangEntity batarang = new BMBatarangEntity(standEntity, world, userPower);
-                batarang.setBreakBlocks(shift);
-                batarang.setLowerKnockback(!shift);
-                standEntity.shootProjectile(batarang, shift ? 3.0F : 2.0F, shift ? 1.0F : 8.0F);
+                HGEmeraldEntity emerald = new HGEmeraldEntity(standEntity, world, userPower);
+                emerald.setBreakBlocks(shift);
+                emerald.setLowerKnockback(!shift);
+                standEntity.shootProjectile(emerald, shift ? 3.0F : 2.0F, shift ? 1.0F : 8.0F);
             }, fireRate);
 
-            BatmanEntity batman = (BatmanEntity) standEntity;
+            HierophantGreenEntity hierophant = (HierophantGreenEntity) standEntity;
+            int barriers = hierophant.getPlacedBarriersCount();
+            if (barriers > 0) {
+                RayTraceResult rayTrace = aimForBarriers(hierophant);
+                if (rayTrace.getType() != RayTraceResult.Type.MISS) {
+                    hierophant.getBarriersNet().shootEmeraldsFromBarriers(userPower, hierophant, rayTrace.getLocation(), task.getTick(),
+                            Math.min((hierophant.getPlacedBarriersCount() / 5), 9) * hierophant.getStaminaCondition(),
+                            ModStandsInit.HIEROPHANT_GREEN_EMERALD_SPLASH_CONCENTRATED.get().getStaminaCostTicking(userPower) * 0.5F, 8, true);
+                }
+            }
         }
     }
 
-    @Override
-    public void onMaxTraining(IStandPower power) {
-        power.unlockAction((StandAction) getShiftVariationIfPresent());
+    private RayTraceResult aimForBarriers(HierophantGreenEntity stand) {
+        return JojoModUtil.rayTrace(stand.isManuallyControlled() ? stand : stand.getUser(),
+                stand.getMaxRange(), entity -> entity instanceof LivingEntity && stand.canAttack((LivingEntity) entity));
     }
 
     @Override
